@@ -1,0 +1,33 @@
+:root {
+  --color-1: #9d64e3;
+  --color-2: #64e3e0;
+  --color-3:#e36464 ;
+  --color-4: #80ffbd;
+}
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+[dragable='true'] {
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+}
+
+button {
+  cursor: pointer;
+}
+html, body {
+  color-scheme: dark light;
+}
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background-color: #1a1a1a;
+  }
+}
+@media (prefers-color-scheme: light) {
+  html, body {
+    background-color: #ececec;
+  }
+}

@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+datasource db {
+  provider = "sqlite"
+  url      = "file:../src/db/dev.db"
+}
+
+model ToDo {
+  id    Int     @id @default(autoincrement())
+  title String
+  stage String  @default("TODO")
+  Tasks Tasks[]
+}
+
+model Tasks {
+  id     Int     @id @default(autoincrement())
+  parent ToDo    @relation(fields: [todoId], references: [id], onDelete: Cascade)
+  todoId Int
+  title  String
+  type   String  @default("NORMAL")
+  time   String?
+  Doc    Doc[]
+}
+
+model Doc {
+  id      Int    @id @default(autoincrement())
+  task    Tasks  @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  taskId  Int
+  content String
+}

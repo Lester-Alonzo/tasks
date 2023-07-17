@@ -1,0 +1,21 @@
+FROM node
+RUN mkdir -p /usr/src/app
+RUN mkdir -p /usr/src/app/backend
+
+WORKDIR /usr/src/app/backend
+
+COPY package*.json ./
+COPY prisma ./prisma
+# COPY .env ./
+# RUN  cat .env
+RUN npm install 
+RUN npm run generate
+RUN npm run migrate
+RUN npm i -D @types/express @types/cors 
+RUN npm i ts-node
+
+COPY . .
+
+EXPOSE 3001
+
+CMD [ "npm", "run", "dev" ]
