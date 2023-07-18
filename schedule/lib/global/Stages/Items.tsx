@@ -16,7 +16,7 @@ export function Items({element, index, parent}:Props) {
     const {CurrentParent} = useBubble()
     const handleMessage = (message:string) => console.log(message)
     const handleDelete = async (id:number) => {
-        const url = process.env.BASE_URL || 'http://localhost:3001/v1/'
+        const url = process.env.BASE_URL || 'http://10.0.1.200:3001/v1/'
         const res = await fetch(`${url}dtd/${id}`, 
         {
             method:"Delete"

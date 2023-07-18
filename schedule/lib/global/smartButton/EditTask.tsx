@@ -21,7 +21,7 @@ export function EditTask({Citem, styles}:{Citem:Task, styles?:Object}) {
 
     const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const url = process.env.BASE_URL || 'http://localhost:3001/v1/'
+        const url = 'http://10.0.1.200:3001/v1/'
         const res = await fetch(`${url}uptk/${Citem.id}`, {
             method:"PUT",
             headers:{

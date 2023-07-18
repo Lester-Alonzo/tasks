@@ -28,7 +28,7 @@ export default function Home() {
   useEffect(()  =>{
 
     ( async () => {
-    const url = process.env.BASE_URL || 'http://localhost:3001/v1/'
+    const url = 'http://10.0.1.200:3001/v1/'
   const res = await fetch(url)
   const data = await res.json()
   console.log(data)
