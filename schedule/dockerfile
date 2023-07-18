@@ -5,9 +5,8 @@ RUN mkdir -p /usr/src/app/front
 WORKDIR /usr/src/app/front
 
 COPY package*.json ./
-#dest COPY .env.local ./
-ENV BASE_URL=http://10.0.1.200:3001/v1/
-ENV SOCKET_URL=http://10.0.1.200:3001
+COPY .env.local ./
+
 RUN npm config rm proxy 
 RUN npm config rm https-proxy --tried removing npm proxy 
 RUN npm install
