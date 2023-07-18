@@ -15,7 +15,8 @@ export function ModalAddTask({id, fnClose}:{id:number, fnClose:()=>void}) {
         e.preventDefault()
         const title = inputRef?.current?.value
         const type = selctRef?.current?.value
-        const res = await fetch(`http://localhost:3001/v1/cntk/${id}`, {
+        const url = process.env.BASE_URL || 'http://localhost:3001/v1/'
+        const res = await fetch(`${url}cntk/${id}`, {
             method:"POST",
             headers:{
                 'Content-Type':'application/json'

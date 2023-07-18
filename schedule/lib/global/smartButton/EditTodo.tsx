@@ -12,7 +12,8 @@ export function EditTodo({Citem, styles}:{Citem:ToDo, styles?:Object}) {
 
     const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const res = await fetch(`http://localhost:3001/v1/uptd/${Citem.id}`, {
+        const url = process.env.BASE_URL || 'http://localhost:3001/v1/'
+        const res = await fetch(`${url}uptd/${Citem.id}`, {
             method:"PUT",
             headers:{
                 'Content-Type':'application/json'

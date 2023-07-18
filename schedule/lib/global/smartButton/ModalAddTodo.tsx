@@ -7,7 +7,8 @@ export function ModalAddTodo({fnClose}:{fnClose:()=>void}) {
     const Create = async (e:FormEvent) => {
         e.preventDefault()
         if(ref?.current?.value !== '') {
-            const res = await fetch('http://localhost:3001/v1/cntd', {
+            const url = process.env.BASE_URL || 'http://localhost:3001/v1/'
+            const res = await fetch(`${url}cntd`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

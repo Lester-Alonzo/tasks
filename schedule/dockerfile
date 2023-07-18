@@ -5,6 +5,7 @@ RUN mkdir -p /usr/src/app/front
 WORKDIR /usr/src/app/front
 
 COPY package*.json ./
+COPY .env.local ./
 RUN npm config rm proxy 
 RUN npm config rm https-proxy --tried removing npm proxy 
 RUN npm install
