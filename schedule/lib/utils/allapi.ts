@@ -1,4 +1,5 @@
-import { ToDo } from "@/lib/types/global"
+import { ToDo, Task } from "@/lib/types/global"
+
 export const allTT = async (): Promise<any> => {
   const url = process.env.BASE_URL || "http://10.0.1.200:3001/v1/"
   const res = await fetch(url)
@@ -7,11 +8,45 @@ export const allTT = async (): Promise<any> => {
   let doing: ToDo[] = []
   let todo: ToDo[] = []
   let stopped: ToDo[] = []
+  let runnig: Task[] = []
+
   data.forEach((element) => {
-    if (element.stage.toUpperCase() === "DONE") done.push(element)
-    if (element.stage.toUpperCase() === "DOING") doing.push(element)
-    if (element.stage.toUpperCase() === "TODO") todo.push(element)
-    if (element.stage.toUpperCase() === "STOPED") stopped.push(element)
+    if (element.stage.toUpperCase() === "DONE") {
+      console.log("done")
+      let fdn = localScan(element.Tasks)
+      runnig.push(...fdn)
+      console.log(runnig)
+      done.push(element)
+    }
+    if (element.stage.toUpperCase() === "DOING") {
+      console.log("doing")
+      let fdn = localScan(element.Tasks)
+      runnig.push(...fdn)
+      console.log(runnig)
+      doing.push(element)
+    }
+    if (element.stage.toUpperCase() === "TODO") {
+      console.log("todo")
+      let fdn = localScan(element.Tasks)
+      runnig.push(...fdn)
+      console.log(runnig)
+      todo.push(element)
+    }
+    if (element.stage.toUpperCase() === "STOPED") {
+      console.log("stopped")
+      let fdn = localScan(element.Tasks)
+      runnig.push(...fdn)
+      console.log(runnig)
+      stopped.push(element)
+    }
   })
-  return { done, doing, todo, stopped }
+  return { done, doing, todo, stopped, runnig }
+}
+
+const localScan = (task: Task[]): Task[] => {
+  let final:Task[] = []
+  task.forEach((element) => {
+    if(element.time != "") final.push(element)
+  })
+  return final
 }

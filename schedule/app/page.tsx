@@ -7,7 +7,7 @@ import { useEffect } from "react"
 import {AddTodo} from '@/lib/global'
 
 export default function Home() {
-  const { doing, done, stoped, todo } = useGeneralContext()
+  const { doing, done, stoped, todo, running } = useGeneralContext()
 
   const handlejClic = () => {
     socket.emit('message', 'hello')
@@ -28,10 +28,14 @@ export default function Home() {
   useEffect(()  =>{
 
     ( async () => {
-    const url = 'http://10.0.1.200:3001/v1/'
-  const res = await fetch(url)
-  const data = await res.json()
-  console.log(data)
+      let data = localStorage.getItem('asign')
+      console.log("soy el page runn", running)
+
+      if(data !== null && running?.length !== 0) return 
+
+      else if(data === null && running?.length !== 0) {
+        localStorage.setItem('asign', JSON.stringify(running))
+      }
   })()
   },[])
   return (

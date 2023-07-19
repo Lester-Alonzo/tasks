@@ -6,7 +6,7 @@ import {
   useEffect,
 } from "react"
 import {allTT} from '@/lib/utils/allapi'
-import { ToDo } from '@/lib/types/global';
+import { Task, ToDo } from '@/lib/types/global';
 import {socket} from '@/lib/utils/socke'
 
 interface ContextProps {
@@ -14,6 +14,7 @@ interface ContextProps {
   doing: ToDo[]
   stoped: ToDo[]
   done: ToDo[]
+  running: Task[]
   handleDragstart: (id:number, data:ToDo) => void
   handleDragEnter: (enterparent:string) => void
   handleDragEnd: (lastparent:string) => void
@@ -24,6 +25,7 @@ const GeneralContext = createContext<ContextProps>({
   doing: [],
   stoped: [],
   done: [],
+  running: [],
   handleDragstart: (id:number, data:ToDo) => {},
   handleDragEnter: (enterprent:string) => {},
   handleDragEnd: ( lastparent:string) => {},
@@ -38,6 +40,7 @@ export const GeneralProvider = ({
   const [doing, setDoing] = useState<Array<ToDo>>([])
   const [stoped, setStoped] = useState<Array<ToDo>>([])
   const [done, setDone] = useState<Array<ToDo>>([])
+  const [running, setRunning] = useState<Array<Task>>([])
   const [currenDrag, setCurrenDrag] = useState(0)
   const [currentStage, setCurrentStage] = useState<ToDo>()
   const [newIndex, setNewIndex] = useState('')
@@ -112,11 +115,12 @@ export const GeneralProvider = ({
   }, [currentStage])
   useEffect(() => {
     const getall = async () => {
-      const { done, doing, todo, stopped } = await allTT()
+      const { done, doing, todo, stopped, runnig} = await allTT()
       setTodo(todo)
       setDoing(doing)
       setStoped(stopped)
       setDone(done)
+      setRunning(runnig)
     }
     getall()
   },[])
@@ -128,6 +132,7 @@ export const GeneralProvider = ({
         doing,
         stoped,
         done,
+        running,
         handleDragEnd,
         handleDragEnter,
         handleDragstart

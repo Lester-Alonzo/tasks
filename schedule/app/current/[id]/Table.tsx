@@ -8,10 +8,11 @@ import {useState, useEffect} from 'react'
 import {socket} from '@/lib/utils/socke'
 import {useBubble} from '@/lib/context/Bubble'
 import {EditTask} from '@/lib/global'
+import {Asign} from './Asign'
 
 export function Table({data}:{data:Task[]}) {
     const [docdat, setDocdata] = useState<Docs[]>([])
-    const [AsignarDone, setAsignarDone] = useState(false)
+    const [cId, setcId] = useState<number>(0)
     const {AddNewLocalTask} = useBubble()
     console.log("data", data)
 
@@ -21,7 +22,8 @@ export function Table({data}:{data:Task[]}) {
     }
 
     const handleSetTime = (id:number) => {
-        setAsignarDone(prev => !prev)
+        if(cId == id) return
+        setcId(id)
         socket.emit('asign', {tid: id, time: new Date()})
     }
 
@@ -61,7 +63,8 @@ export function Table({data}:{data:Task[]}) {
                         <td>{task.time !== '' ? task.time : 'sa'}</td>
                         <td>{task.type}</td>
                         <td className={styles.actions}>
-                            {task.time === '' && !AsignarDone? <button title='asignar' onClick={() => handleSetTime(task.id)}> <FcClock style={{color:"black"}}/> </button> : <BiCurrentLocation style={{fontSize:"1.3rem", color:"black"}}/>}
+                            {/* {task.time === '' && !AsignarDone? <button title='asignar' onClick={() => handleSetTime(task.id)}> <FcClock style={{color:"black"}}/> </button> : <BiCurrentLocation style={{fontSize:"1.3rem", color:"black"}}/>} */}
+                            <Asign handleSetTime={handleSetTime} id={task.id} time={task.time}/>
                             <EditTask Citem={task} styles={{backgroundColor:"red"}}/>
                             <button title='eliminar' onClick={() => handleDelete(task.id)}><FcDeleteRow/></button>
                             <button title='Ver content' onClick={() => handleClic(task.Doc)}> <FcDocument/> </button>
