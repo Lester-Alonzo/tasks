@@ -1,9 +1,12 @@
 'use client'
 import {TASK_TYPE} from '@/lib/types/global'
 import {FormEvent, useRef} from 'react'
+import {useTableContext} from '@/lib/context/tableContext'
 export function ModalAddTask({id, fnClose}:{id:number, fnClose:()=>void}) {
     const selctRef = useRef<HTMLSelectElement>(null)
     const inputRef = useRef<HTMLInputElement>(null)
+
+    const {updateDataTask} = useTableContext()
 
     const options:{type:TASK_TYPE, label:string}[] = [ 
         {type:"NUI", label:"No urgente | importante"},
@@ -27,7 +30,11 @@ export function ModalAddTask({id, fnClose}:{id:number, fnClose:()=>void}) {
                 time: ''
             })
         })
-        if(res.ok) fnClose()
+        if(res.ok) {
+            const data = await res.json()
+            updateDataTask(data)
+            fnClose()
+        } 
     }
    return <form onSubmit={handleSubmit} style={{width:"calc(100% - 30%)", height:"calc(100vh - 56vh)", display:"flex", justifyContent:"center", alignItems:"center", gap:"1rem", backgroundColor:"rgba(0,0,0)",borderRadius:"23px"}}>
         <input type="text" placeholder='Ingresa el titulo de la tarea' ref={inputRef} style={{padding:'1rem', border:"none", borderRadius:"11px", backgroundColor:"white", color:"black"}}/>

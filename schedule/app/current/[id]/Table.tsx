@@ -7,6 +7,7 @@ import {MD} from './MD'
 import {useState, useEffect} from 'react'
 import {socket} from '@/lib/utils/socke'
 import {useBubble} from '@/lib/context/Bubble'
+import {useTableContext} from '@/lib/context/tableContext'
 import {EditTask} from '@/lib/global'
 import {Asign} from './Asign'
 
@@ -14,6 +15,7 @@ export function Table({data}:{data:Task[]}) {
     const [docdat, setDocdata] = useState<Docs[]>([])
     const [cId, setcId] = useState<number>(0)
     const {AddNewLocalTask} = useBubble()
+    const {Taskdata, setDataTask} = useTableContext()
     console.log("data", data)
 
     const handleClic = (doc:Docs[]) => {
@@ -41,6 +43,7 @@ export function Table({data}:{data:Task[]}) {
         socket.on('asign', (result) => {
             AddNewLocalTask(result)
         })
+        setDataTask(data)
     },[])
 
     return (
@@ -57,7 +60,7 @@ export function Table({data}:{data:Task[]}) {
                 </tr>
             </thead>
             <tbody>
-                {data.map((task, i) => (
+                {Taskdata.map((task, i) => (
                     <tr key={i}>
                         <td className={styles.title_task}>{task.title}</td>
                         <td>{task.time !== '' ? task.time : 'sa'}</td>
