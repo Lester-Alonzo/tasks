@@ -18,6 +18,7 @@ interface ContextProps {
   handleDragstart: (id:number, data:ToDo) => void
   handleDragEnter: (enterparent:string) => void
   handleDragEnd: (lastparent:string) => void
+  addNewTodo: (data:ToDo) => void
 }
 
 const GeneralContext = createContext<ContextProps>({
@@ -29,6 +30,7 @@ const GeneralContext = createContext<ContextProps>({
   handleDragstart: (id:number, data:ToDo) => {},
   handleDragEnter: (enterprent:string) => {},
   handleDragEnd: ( lastparent:string) => {},
+  addNewTodo: (data:ToDo) => {}
 })
 
 export const GeneralProvider = ({
@@ -106,6 +108,9 @@ export const GeneralProvider = ({
     mapItems[newIndex.toLowerCase()]( "entrada",currenDrag)
     socket.emit('update', {id: currenDrag, stage: newIndex})
   }
+  const addNewTodo = (data:ToDo) => {
+    setTodo(prev => [...prev, data])
+  }
 
   useEffect(() =>{
     setTodo(todo)
@@ -135,7 +140,8 @@ export const GeneralProvider = ({
         running,
         handleDragEnd,
         handleDragEnter,
-        handleDragstart
+        handleDragstart,
+        addNewTodo
       }}
     >
       {children}

@@ -1,6 +1,8 @@
 'use client'
 import {FormEvent, useRef} from 'react'
+import { useGeneralContext } from '@/lib/context/genralContext'
 export function ModalAddTodo({fnClose}:{fnClose:()=>void}) {
+    const {addNewTodo} = useGeneralContext()
 
     const ref = useRef<HTMLInputElement>(null)
 
@@ -18,8 +20,10 @@ export function ModalAddTodo({fnClose}:{fnClose:()=>void}) {
                     stage: 'todo'
                 })
             })
-            console.log(res)
             if(res.ok) {
+                const data = await res.json()
+                data.Tasks = []
+                addNewTodo(data)
                 fnClose()
             }
         }

@@ -29,6 +29,10 @@ export function Table({data}:{data:Task[]}) {
         socket.emit('asign', {tid: id, time: new Date()})
     }
 
+    const seeDoc = (dosc:Docs[],pid:number) => {
+        handleClic(dosc)
+    }
+
     const handleDelete = async (id:number) => {
         const url = 'http://10.0.1.200:3001/v1/'
         const res = await fetch(`${url}dtk/${id}`, 
@@ -70,7 +74,7 @@ export function Table({data}:{data:Task[]}) {
                             <Asign handleSetTime={handleSetTime} id={task.id} time={task.time}/>
                             <EditTask Citem={task} styles={{backgroundColor:"red"}}/>
                             <button title='eliminar' onClick={() => handleDelete(task.id)}><FcDeleteRow/></button>
-                            <button title='Ver content' onClick={() => handleClic(task.Doc)}> <FcDocument/> </button>
+                            <button title='Ver content' onClick={() => seeDoc(task.Doc,task.id)}> <FcDocument/> </button>
                         </td>
                     </tr>
                 ))}

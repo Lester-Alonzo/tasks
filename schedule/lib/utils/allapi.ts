@@ -4,6 +4,7 @@ export const allTT = async (): Promise<any> => {
   const url = process.env.BASE_URL || "http://10.0.1.200:3001/v1/"
   const res = await fetch(url)
   const data = (await res.json()) as ToDo[]
+  console.log(data)
   let done: ToDo[] = []
   let doing: ToDo[] = []
   let todo: ToDo[] = []
@@ -13,28 +14,28 @@ export const allTT = async (): Promise<any> => {
   data.forEach((element) => {
     if (element.stage.toUpperCase() === "DONE") {
       console.log("done")
-      let fdn = localScan(element.Tasks)
+      let fdn = localScan(element.Tasks, element.title)
       runnig.push(...fdn)
       console.log(runnig)
       done.push(element)
     }
     if (element.stage.toUpperCase() === "DOING") {
       console.log("doing")
-      let fdn = localScan(element.Tasks)
+      let fdn = localScan(element.Tasks, element.title)
       runnig.push(...fdn)
       console.log(runnig)
       doing.push(element)
     }
     if (element.stage.toUpperCase() === "TODO") {
       console.log("todo")
-      let fdn = localScan(element.Tasks)
+      let fdn = localScan(element.Tasks, element.title)
       runnig.push(...fdn)
       console.log(runnig)
       todo.push(element)
     }
     if (element.stage.toUpperCase() === "STOPED") {
       console.log("stopped")
-      let fdn = localScan(element.Tasks)
+      let fdn = localScan(element.Tasks, element.title)
       runnig.push(...fdn)
       console.log(runnig)
       stopped.push(element)
@@ -43,10 +44,13 @@ export const allTT = async (): Promise<any> => {
   return { done, doing, todo, stopped, runnig }
 }
 
-const localScan = (task: Task[]): Task[] => {
+const localScan = (task: Task[], parent:string): Task[] => {
   let final:Task[] = []
   task.forEach((element) => {
-    if(element.time != "") final.push(element)
+    if(element.time != "") {
+      element.parent = parent
+      final.push(element)
+    } 
   })
   return final
 }
