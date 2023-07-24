@@ -1,7 +1,7 @@
 import {app, server, io, prisma} from './app'
 import {Request, Response} from 'express'
 
-app.get('/', async (req:Request, res:Response) => {
+app.get('/api', async (req:Request, res:Response) => {
     res.send('Hello World')
 })
 io.on('connection', (socket) => {

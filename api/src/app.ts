@@ -30,7 +30,7 @@ app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 app.use(helmet())
 app.use(morgan('dev'))
-app.use('/v1', v1)
+app.use('/api/v1', v1)
 app.use(limit)
 
 export {app, prisma, io, server}
