@@ -34,7 +34,7 @@ export function Table({data}:{data:Task[]}) {
     }
 
     const handleDelete = async (id:number) => {
-        const url = 'http://10.0.1.200:3001/v1/'
+        const url = process.env.NEXT_PUBLIC_BASE_URL as string
         const res = await fetch(`${url}dtk/${id}`, 
         {
             method:"Delete"

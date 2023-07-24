@@ -2,7 +2,7 @@ import {Task} from '@/lib/types/global'
 import {Table} from './Table'
 import {AddTask} from '@/lib/global'
 export default async function Page({params}:{params:{id:string}}) {
-    const url = 'http://10.0.1.200:3001/v1/'
+    const url = process.env.NEXT_PUBLIC_BASE_URL as string
     const data = await fetch(`${url}tdtk/${params.id}`, {next: {revalidate:0}})
     const res:Task[] = await data.json()
     return (

@@ -12,7 +12,7 @@ export function EditTodo({Citem, styles}:{Citem:ToDo, styles?:Object}) {
 
     const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const url = 'http://10.0.1.200:3001/v1/'
+        const url = process.env.NEXT_PUBLIC_BASE_URL as string
         const res = await fetch(`${url}uptd/${Citem.id}`, {
             method:"PUT",
             headers:{

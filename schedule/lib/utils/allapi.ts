@@ -1,7 +1,7 @@
 import { ToDo, Task } from "@/lib/types/global"
 
 export const allTT = async (): Promise<any> => {
-  const url = process.env.BASE_URL || "http://10.0.1.200:3001/v1/"
+  const url = process.env.NEXT_PUBLIC_BASE_URL as string
   const res = await fetch(url)
   const data = (await res.json()) as ToDo[]
   console.log(data)

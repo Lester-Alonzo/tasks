@@ -9,7 +9,7 @@ export function ModalAddTodo({fnClose}:{fnClose:()=>void}) {
     const Create = async (e:FormEvent) => {
         e.preventDefault()
         if(ref?.current?.value !== '') {
-            const url = process.env.BASE_URL || 'http://10.0.1.200:3001/v1/'
+            const url = process.env.NEXT_PUBLIC_BASE_URL as string
             const res = await fetch(`${url}cntd`, {
                 method: 'POST',
                 headers: {
