@@ -26,7 +26,6 @@ export default function Home() {
     }
   },[])
   useEffect(()  =>{
-
     ( async () => {
       let data = localStorage.getItem('asign')
       console.log("soy el page runn", running)

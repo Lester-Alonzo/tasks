@@ -1,6 +1,7 @@
 import { ToDo, Task } from "@/lib/types/global"
 
 export const allTT = async (): Promise<any> => {
+  console.log("env passed", process.env.NEXT_PUBLIC_API_URL as string)
   const url = process.env.NEXT_PUBLIC_BASE_URL as string
   const res = await fetch(url)
   const data = (await res.json()) as ToDo[]
