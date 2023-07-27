@@ -31,7 +31,7 @@ export function Items({element, index, parent}:Props) {
     }
     return (
         <div draggable className={styles.card_item} onDragStart={() =>  handleDragstart(element.id,element)} onTouchStart={() => console.log(element.id,element)}>
-            <h5>{element.title}</h5>
+            <h5 className={styles.ttt}>{element.title}</h5>
             <span>{element.stage}</span>
             <span>{element.Tasks.length}</span>
             <nav className={styles.btns}>

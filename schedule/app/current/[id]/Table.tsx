@@ -10,12 +10,14 @@ import {useBubble} from '@/lib/context/Bubble'
 import {useTableContext} from '@/lib/context/tableContext'
 import {EditTask} from '@/lib/global'
 import {Asign} from './Asign'
+import {useDocContext} from '@/lib/context/DocContext'
 
 export function Table({data}:{data:Task[]}) {
     const [docdat, setDocdata] = useState<Docs[]>([])
     const [cId, setcId] = useState<number>(0)
     const {AddNewLocalTask} = useBubble()
     const {Taskdata, setDataTask} = useTableContext()
+    const {setCurentID} = useDocContext()
     console.log("data", data)
 
     const handleClic = (doc:Docs[]) => {
@@ -30,6 +32,7 @@ export function Table({data}:{data:Task[]}) {
     }
 
     const seeDoc = (dosc:Docs[],pid:number) => {
+        setCurentID(pid)
         handleClic(dosc)
     }
 

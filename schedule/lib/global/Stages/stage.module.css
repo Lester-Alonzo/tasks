@@ -3,6 +3,11 @@
     border-radius: 11px;
     padding: 1rem;
     box-shadow: 1px 1px 11px rgba(0, 0, 0, 0.575);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: .5rem;
 }
 .card_item {
     display: flex;
@@ -10,9 +15,12 @@
     border: 1px solid white;
     justify-content: center;
     align-items: center;
-    padding: .4rem;
+    padding: .9rem;
+    padding-top: 1rem;
     cursor: move;
     border-radius: 11px;
+    position: relative;
+    width: 100%;
 }
 .title {
     font-size: 1.5rem;
@@ -32,4 +40,9 @@
     border: none;
     border-radius: 50%;
     font-size: 1.5rem;
+}
+.ttt {
+    position: absolute;
+    top: 0;
+    left: 8px;
 }

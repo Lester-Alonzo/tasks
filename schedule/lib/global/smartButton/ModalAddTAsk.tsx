@@ -36,7 +36,7 @@ export function ModalAddTask({id, fnClose}:{id:number, fnClose:()=>void}) {
             fnClose()
         } 
     }
-   return <form onSubmit={handleSubmit} style={{width:"calc(100% - 30%)", height:"calc(100vh - 56vh)", display:"flex", justifyContent:"center", alignItems:"center", gap:"1rem", backgroundColor:"rgba(0,0,0)",borderRadius:"23px"}}>
+   return <form onSubmit={handleSubmit} style={{width:"calc(100% - 15%)", height:"calc(100vh - 56vh)", display:"flex", justifyContent:"center", alignItems:"center", gap:"1rem", backgroundColor:"rgba(0,0,0)",borderRadius:"23px", flexDirection:"column"}}>
         <input type="text" placeholder='Ingresa el titulo de la tarea' ref={inputRef} style={{padding:'1rem', border:"none", borderRadius:"11px", backgroundColor:"white", color:"black"}}/>
         <select ref={selctRef} style={{padding:'1rem', border:"none", borderRadius:"11px", backgroundColor:"white", color:"black"}}>
             <option value="">--------</option>

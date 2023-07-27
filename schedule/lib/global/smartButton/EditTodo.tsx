@@ -3,6 +3,7 @@ import {WrapButton} from './BtnModalWrap'
 import {useState, useRef} from 'react'
 import {ToDo} from '@/lib/types/global'
 import {MdDoneOutline} from 'react-icons/md'
+import styless from './warp.module.css'
 
 export function EditTodo({Citem, styles}:{Citem:ToDo, styles?:Object}) {
     const [modal, setModal] = useState(false)
@@ -29,8 +30,8 @@ export function EditTodo({Citem, styles}:{Citem:ToDo, styles?:Object}) {
     return <>
     {modal && <WrapButton Zindex={4}>
         <button onClick={handleClick} style={{position:"absolute", left:"4rem", top:"4rem"}}>❌</button>
-        <form onSubmit={handleSubmit} style={{backgroundColor:"black", width:"calc(100% - 45%)", height:"calc(100vh - 43vh)", borderRadius:"41px", display:"flex", justifyContent:"center", alignItems:"center", gap:"1rem"}}>
-            <input type="text" defaultValue={Citem.title} ref={InpuRef} style={{padding:"1rem", border:"none", borderRadius:"12px"}}/>
+        <form onSubmit={handleSubmit} className={styless.edittodo}>
+            <input type="text" defaultValue={Citem.title} ref={InpuRef}/>
             <button> <MdDoneOutline/> </button>
         </form>
     </WrapButton>}
