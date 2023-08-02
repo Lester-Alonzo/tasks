@@ -6,8 +6,12 @@ services:
       - "3001:3001"
     container_name: "backapp"
     restart: always
+    volumes:
+      - /media/back:/usr/src/app/backend/prisma
   front:
     build: ./schedule
     ports:
       - "3000:3000"
     restart: always
+volumes:
+  back:
