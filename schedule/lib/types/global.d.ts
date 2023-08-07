@@ -22,4 +22,12 @@ interface Task {
 interface Docs {
     id : number;
     content: string;
+    type: DOC_TYPE,
+}
+
+type DOC_TYPE = 'title' | 'separetor' | 'text' | 'image' | 'link' 
+export interface CurrentDoc {
+    type: DOC_TYPE,
+    content: string
+    url?: string
 }

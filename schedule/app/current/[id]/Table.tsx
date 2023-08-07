@@ -85,7 +85,7 @@ export function Table({data}:{data:Task[]}) {
         </table>
         </section>
         
-        <MD doc={docdat}/>
+        <MD docfrom={docdat}/>
         </>
     )
 }

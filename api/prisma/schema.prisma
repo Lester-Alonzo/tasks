@@ -36,4 +36,5 @@ model Doc {
   task    Tasks  @relation(fields: [taskId], references: [id], onDelete: Cascade)
   taskId  Int
   content String
+  type  String @default("text")
 }

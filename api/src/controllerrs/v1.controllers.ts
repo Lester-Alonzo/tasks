@@ -73,11 +73,12 @@ export async function CreateNewTask(req:Request, res:Response) {
 }
 export async function CreateNewDoc(req:Request, res:Response) {
     const {tdc} = req.params
-    const {content} = req.body
+    const {content, type} = req.body
     try {
         const result = await prisma.doc.create({
             data: {
                 content: content,
+                type: type,
                 taskId: parseInt(tdc)
             }
         })
