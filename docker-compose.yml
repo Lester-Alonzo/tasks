@@ -7,7 +7,7 @@ services:
     container_name: "backapp"
     restart: always
     volumes:
-      - /media/back:/usr/src/app/backend/prisma
+      - /media/back:/usr/src/app/backend/prisma/db/
   front:
     build: ./schedule
     ports:
