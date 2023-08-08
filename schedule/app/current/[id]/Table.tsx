@@ -75,7 +75,7 @@ export function Table({data}:{data:Task[]}) {
                         <td className={styles.actions}>
                             {/* {task.time === '' && !AsignarDone? <button title='asignar' onClick={() => handleSetTime(task.id)}> <FcClock style={{color:"black"}}/> </button> : <BiCurrentLocation style={{fontSize:"1.3rem", color:"black"}}/>} */}
                             <Asign handleSetTime={handleSetTime} id={task.id} time={task.time}/>
-                            <EditTask Citem={task} styles={{backgroundColor:"red"}}/>
+                            <EditTask Citem={task} styles={{backgroundColor:"#d1ea76", color:"black"}}/>
                             <button title='eliminar' onClick={() => handleDelete(task.id)}><FcDeleteRow/></button>
                             <button title='Ver content' onClick={() => seeDoc(task.Doc,task.id)}> <FcDocument/> </button>
                         </td>

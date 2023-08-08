@@ -46,3 +46,22 @@
     top: 0;
     left: 8px;
 }
+.menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.26);
+    gap: .4rem;
+    padding: 1rem;
+    border-radius: 21px;
+    z-index: 200;
+}
+.menu button {
+    width: 51px;
+    height: 51px;
+    border-radius: 11px;
+    border: none;
+    background-color: #f3d7bd;
+    color: black;
+}

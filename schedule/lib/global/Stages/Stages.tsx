@@ -11,7 +11,7 @@ type Props = {
 export function Stages({color, title,elements = []}:Props) {
     const {handleDragEnter, handleDragEnd} = useGeneralContext()
     return (
-        <div style={{backgroundColor:`var(${color})`}} className={styles.card} onDragEnter={() => handleDragEnter(title)} onDragEnd={() => handleDragEnd(title)} onTouchMove={() => console.log(title)} onTouchEnd={() => console.log(title)}>
+        <div style={{backgroundColor:`var(${color})`}} className={styles.card} onDragEnter={() => handleDragEnter(title)} onDragEnd={() => handleDragEnd(title)} onTouchMove={() => console.log(title)} >
             <h3 className={styles.title}>{title}</h3>
             {
                 elements.map((element:ToDo, index:number) => (
