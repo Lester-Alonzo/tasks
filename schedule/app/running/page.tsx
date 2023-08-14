@@ -3,15 +3,14 @@ import {PassDays} from '@/lib/utils/utils'
 import {Task} from '@/lib/types/global'
 import {CD} from '@/lib/global'
 
-export default async function Running() {
+export default async function Page() {
 
         const url = process.env.NEXT_PUBLIC_BASE_URL as string
         const res = await fetch(`${url}alldy`, {next: {revalidate:0}})
         const AllLocalTask:Task[] = await res.json()
 
     if(AllLocalTask.length == 0) return <h1>No hay datos</h1>
-
-    else return (
+    return (
         <main className={styles.main}>
             <section>
             {AllLocalTask.map( (task) => (
