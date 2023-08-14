@@ -6,14 +6,18 @@ type BubbleContext = {
     counter: number,
     AddNewLocalTask: (newItem:Task) => void,
     AllLocalTask: Task[],
-    CurrentParent: (parent:string) => void
+    CurrentParent: (parent:string) => void,
+    PickerState: (state:boolean) => void,
+    pickers: boolean
 }
 
 const BubbleContext = createContext<BubbleContext>({
     counter: 0,
     AddNewLocalTask: (newItem: Task) => {},
     AllLocalTask:[],
-    CurrentParent: (parent:string) => {}
+    CurrentParent: (parent:string) => {},
+    PickerState: (state:boolean) => {},
+    pickers: false
 })
 
 export function BubbleProvider({children}:{children:React.ReactNode}) {
@@ -21,9 +25,13 @@ export function BubbleProvider({children}:{children:React.ReactNode}) {
     const [AllLocalTask, setAllLocaTask] = useState<Task[]>([])
     const [utl,setUtl] = useState(0)
     const [parent,setParent] = useState('')
+    const [pickers, setPicker] = useState(false)
 
     const PlusCount = () => {
         setCounter(prev => prev + 1)
+    }
+    const PickerState = (state:boolean) => {
+        setPicker(prev => prev = state)
     }
     const AddNewLocalTask = (newItem:Task) => {
             console.log(newItem)
@@ -55,7 +63,9 @@ export function BubbleProvider({children}:{children:React.ReactNode}) {
             counter,
             AddNewLocalTask,
             AllLocalTask,
-            CurrentParent
+            CurrentParent,
+            PickerState,
+            pickers
         }}
         >
             {children}

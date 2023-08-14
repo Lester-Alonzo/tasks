@@ -29,6 +29,7 @@ model Tasks {
   type   String  @default("NORMAL")
   time   String?
   Doc    Doc[]
+  Days   Days[]
 }
 
 model Doc {
@@ -37,4 +38,11 @@ model Doc {
   taskId  Int
   content String
   type  String @default("text")
+}
+
+model Days {
+  id      Int    @id @default(autoincrement())
+  date    Int
+  taskID Int
+  task    Tasks  @relation(fields: [taskID], references: [id], onDelete: Cascade)
 }

@@ -1,0 +1,37 @@
+.gnmain {
+    display: flex;
+    max-width: 300px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.404);
+    backdrop-filter: blur(6px);
+    padding: 1rem;
+    border-radius: 22px;
+}
+.gnmain form {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: .5rem;
+}
+.gnmain form label {
+    background-color: antiquewhite;
+    color: black;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.gnmain form button {
+    border-radius: 50%;
+    border: none;
+    background-color: rgb(59, 199, 152);
+    color: black;
+    font-weight: bold;
+}

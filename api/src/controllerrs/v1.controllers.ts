@@ -173,3 +173,40 @@ export async function updateDoc(req:Request, res:Response) {
         res.status(500).json({message: error})
     }
 }
+export async function CreateDates(req:Request, res:Response) {
+    const {dates} = req.body
+    const {id} = req.params
+    try {
+        for await (const date of dates) {
+            const result = await prisma.days.create({
+                data: {
+                    date: date,
+                    taskID: parseInt(id)
+                }
+            })
+        }
+        res.status(200).json({message: "Dates created"})
+    } catch (err) {
+        res.status(500).json({message: err})  
+    }
+}
+export async function AllDatesPerTasks(req:Request, res:Response) {
+    //hacer una llamada a la base de datos con prisma, quiero que me devuelva todas las tareas, que contengan la fecha de hoy, teniendo en cuenta que se utiliza new Date().getDay() lo que devuelve un entero del 0 al 6, siendo 0 el domingo y 6 el sabado
+    try {
+        const today = new Date().getDay()
+        const result = await prisma.tasks.findMany({
+            where: {
+                AND: [
+                    {Days: {some: {date: today}}},
+                ]
+            }
+        })
+        if(cache.get('dates')) res.status(200).json(cache.get('dates'))
+        else {
+            cache.set('dates', result)
+            res.status(200).json(result)
+        }
+    } catch (err) {
+        res.status(500).json({message: err})  
+    }
+}

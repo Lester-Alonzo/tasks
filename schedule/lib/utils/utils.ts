@@ -3,6 +3,20 @@ import {CurrentDoc} from '@/lib/types/global'
  * @typedef {import('../types/global').CurrentDoc} CurrentDoc
  */
 
+type DAYS = {
+  [key: number]: string;
+}
+type RE_HAVEDAY = {have:boolean, day:string}
+
+export const MAP_DAYS:DAYS = {
+  0: 'Domingo',
+  1: 'Lunes',
+  2: 'Martes',
+  3: 'Miercoles',
+  4: 'Jueves',
+  5: 'Viernes',
+  6: 'Sabado'
+}
 
 function fileToBase64(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -58,4 +72,20 @@ export function parseDoc(doc: string, url:string): CurrentDoc {
     content: doc,
     type: 'text'
   }
+}
+/**
+ * 
+ * @param {number[]} days - Los dias que se quieren evaluar o 'all' que es una tarea diaria
+ * @returns {RE_HAVEDAY} - {have: boolean, day: string}
+ */
+export function EvaluateHaveThisDay(days:number[] | 'all'):RE_HAVEDAY  {
+  const today = new Date();
+  const day = today.getDay();
+
+  if(days === 'all') return {have: true, day: MAP_DAYS[day]}
+
+  const have = days.includes(day);
+  return {have, day: MAP_DAYS[day]}
+
+
 }
