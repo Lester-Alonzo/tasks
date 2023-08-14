@@ -1,0 +1,25 @@
+.main__counter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 21px;
+    background-color: rgba(0, 0, 0, 0.479);
+}
+.btn {
+    border: none;
+    padding: .5rem ;
+    border-radius: 11px;
+    background-color: royalblue;
+}
+.text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+}
+.text span {
+    font-size: 2rem;
+    font-weight: 600;
+    color: white;
+}

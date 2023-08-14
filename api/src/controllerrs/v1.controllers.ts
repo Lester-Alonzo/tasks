@@ -185,6 +185,7 @@ export async function CreateDates(req:Request, res:Response) {
                 }
             })
         }
+        cache.del('dates')
         res.status(200).json({message: "Dates created"})
     } catch (err) {
         res.status(500).json({message: err})  
