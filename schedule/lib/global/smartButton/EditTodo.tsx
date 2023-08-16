@@ -31,7 +31,7 @@ export function EditTodo({Citem, styles}:{Citem:ToDo, styles?:Object}) {
     {modal && <WrapButton Zindex={4}>
         <button onClick={handleClick} style={{position:"absolute", left:"4rem", top:"4rem"}}>❌</button>
         <form onSubmit={handleSubmit} className={styless.edittodo}>
-            <input type="text" defaultValue={Citem.title} ref={InpuRef}/>
+            <input type="text" defaultValue={Citem.title} ref={InpuRef} autoFocus/>
             <button> <MdDoneOutline/> </button>
         </form>
     </WrapButton>}

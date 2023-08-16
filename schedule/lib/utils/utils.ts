@@ -1,4 +1,4 @@
-import {CurrentDoc} from '@/lib/types/global'
+import {CurrentDoc, TASK_TYPE} from '@/lib/types/global'
 /**
  * @typedef {import('../types/global').CurrentDoc} CurrentDoc
  */
@@ -88,4 +88,11 @@ export function EvaluateHaveThisDay(days:number[] | 'all'):RE_HAVEDAY  {
   return {have, day: MAP_DAYS[day]}
 
 
+}
+
+export function EstaCoins(type:TASK_TYPE) {
+ if(type === 'UI') return 100
+ if(type === 'NUI') return 60
+ if(type === 'UNI') return 80
+ if(type === 'NUNI') return 20
 }

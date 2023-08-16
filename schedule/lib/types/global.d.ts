@@ -31,3 +31,12 @@ export interface CurrentDoc {
     content: string
     url?: string
 }
+type REWARD_TYPE = 'NORMAL' | 'COUNTDOWN'
+export interface Rewards {
+    id : number;
+    price: number;
+    title: string;
+    content: string;
+    type: REWARD_TYPE
+    time?: string
+}

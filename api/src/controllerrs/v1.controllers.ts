@@ -211,3 +211,102 @@ export async function AllDatesPerTasks(req:Request, res:Response) {
         res.status(500).json({message: err})  
     }
 }
+
+export async function InitCoins(req:Request, res:Response) {
+    try {
+        const result = await prisma.coins.create({
+            data: {
+                coin: 0
+            }
+        })
+        res.status(200).json(result)
+    } catch (err) {
+        res.status(500).json({message: err})
+    }
+}
+export async function GetAllCoins(req:Request, res:Response) {
+    try {
+        const result = await prisma.coins.findFirst()
+        res.status(200).json(result)
+    } catch (err) {
+        res.status(500).json({message: err})
+    }
+}
+
+export async function UpdateCoins(req:Request, res:Response) {
+    const {coins} = req.body
+    try {
+        const result = await prisma.coins.update({
+            where: {
+                id: 1
+            },
+            data: {
+                coin: coins
+            }
+        })
+        res.status(200).json(result)
+    } catch (err) {
+        res.status(500).json({message: err})
+    }
+}
+
+export async function CreateReward(req:Request, res:Response) {
+    const {price, title, content, type, time} = req.body
+    console.log(typeof price, typeof title, content, type, time)
+    try {
+        const result = await prisma.rewards.create({
+            data: {
+                price: Number(price),
+                title: title,
+                content: content,
+                type: type,
+                time: time
+            }
+        })
+        res.status(200).json(result)
+    } catch (err) {
+        res.status(500).json({message: err})
+    }
+}
+export async function GetAllRewards(req:Request, res:Response) {
+    try {
+        const result = await prisma.rewards.findMany()
+        res.status(200).json(result)
+    } catch (err) {
+        res.status(500).json({message: err})
+    }
+}
+export async function DeleteReward(req:Request, res:Response) {
+    const {id} = req.params
+    try {
+        const result = await prisma.rewards.delete({
+            where: {
+                id: parseInt(id)
+            }
+        })
+        res.status(200).json(result)
+    } catch (err) {
+        res.status(500).json({message: err})
+    }
+}
+export async function UpdateReward(req:Request, res:Response) {
+    const {id} = req.params
+    const {price, title, content, type, time} = req.body
+    try {
+        const result = await prisma.rewards.update({
+            where: {
+                id: parseInt(id)
+            },
+            data: {
+                price: price,
+                title: title,
+                content: content,
+                type: type,
+                time: time
+            }
+        })
+        res.status(200).json(result)
+    } catch (err) {
+        res.status(500).json({message: err})
+    }
+}

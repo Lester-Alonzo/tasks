@@ -4,7 +4,6 @@ import { useGeneralContext} from '@/lib/context/genralContext';
 import {useRouter}from 'next/navigation'
 import {ToDo} from '@/lib/types/global'
 import {EditTodo} from '../smartButton/EditTodo'
-import {useBubble} from '@/lib/context/Bubble'
 import {CMenuItem} from './CMenu'
 
 type Props = {
@@ -14,7 +13,6 @@ type Props = {
 }
 export function Items({element, index, parent}:Props) {
     const router = useRouter()
-    const {CurrentParent} = useBubble()
     const handleMessage = (message:string) => console.log(message)
     const handleDelete = async (id:number) => {
         const url = process.env.NEXT_PUBLIC_BASE_URL as string
@@ -27,7 +25,6 @@ export function Items({element, index, parent}:Props) {
     }
     const {handleDragstart, setterCmenu, setteronlymo} = useGeneralContext()
     const hanldeRedirect = (id:number, parent:string) => {
-        CurrentParent(parent)
         router.push(`/current/${id}`)
     }
     const handleCMenu = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {

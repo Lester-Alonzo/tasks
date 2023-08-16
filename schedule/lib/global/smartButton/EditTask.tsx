@@ -40,7 +40,7 @@ export function EditTask({Citem, styles}:{Citem:Task, styles?:Object}) {
     {modal && <WrapButton Zindex={4}>
         <button onClick={handleClick} style={{position:"absolute", left:"4rem", top:"4rem"}}>❌</button>
             <form onSubmit={handleSubmit} style={{backgroundColor:"black", width:"calc(100% - 15%)", height:"calc(100vh - 43vh)", borderRadius:"41px", display:"flex", justifyContent:"center", alignItems:"center", gap:"1rem", flexDirection:"column"}}>
-                <input type="text" defaultValue={Citem.title} ref={inpuRef} style={{padding:"1rem", border:"none", borderRadius:"12px"}}/>
+                <input type="text" defaultValue={Citem.title} ref={inpuRef} style={{padding:"1rem", border:"none", borderRadius:"12px"}} autoFocus/>
                 <select defaultValue={Citem.type} ref={selecRef} style={{padding:"1rem", border:"none", borderRadius:"12px"}}>
                     <option value="">--------</option>
                     {options.map(op => (

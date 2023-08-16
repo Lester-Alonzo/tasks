@@ -56,7 +56,7 @@ return (
         {mapdays.map((day, index) => (
             <label htmlFor={day.day} key={index}>
                 {day.day}
-                <input type="checkbox" name="" id={day.day} value={day.date} onChange={handleInput}/>
+                <input type="checkbox" name="" id={day.day} value={day.date} onChange={handleInput} autoFocus/>
             </label>
         ))}
         <button onClick={handleclick} type='button'>listo</button>

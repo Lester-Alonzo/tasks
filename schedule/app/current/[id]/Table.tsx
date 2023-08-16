@@ -1,23 +1,24 @@
 'use client'
-import {Task, Docs} from '@/lib/types/global'
+import {Task, Docs, TASK_TYPE} from '@/lib/types/global'
 import styles from './current.module.css'
 import {FcDeleteRow, FcDocument, FcClock} from 'react-icons/fc'
 import {BiCurrentLocation} from 'react-icons/bi'
 import {MD} from './MD'
 import {useState, useEffect} from 'react'
 import {socket} from '@/lib/utils/socke'
-import {useBubble} from '@/lib/context/Bubble'
+import {EstaCoins} from '@/lib/utils/utils'
 import {useTableContext} from '@/lib/context/tableContext'
 import {EditTask} from '@/lib/global'
 import {Asign} from './Asign'
 import {useDocContext} from '@/lib/context/DocContext'
+import {useBubble} from '@/lib/context/Bubble'
 
 export function Table({data}:{data:Task[]}) {
     const [docdat, setDocdata] = useState<Docs[]>([])
     const [cId, setcId] = useState<number>(0)
-    const {AddNewLocalTask} = useBubble()
     const {Taskdata, setDataTask} = useTableContext()
     const {setCurentID} = useDocContext()
+    const {coins} = useBubble()
     console.log("data", data)
 
     const handleClic = (doc:Docs[]) => {
@@ -36,19 +37,22 @@ export function Table({data}:{data:Task[]}) {
         handleClic(dosc)
     }
 
-    const handleDelete = async (id:number) => {
+    const handleDelete = async (id:number, type:TASK_TYPE) => {
         const url = process.env.NEXT_PUBLIC_BASE_URL as string
         const res = await fetch(`${url}dtk/${id}`, 
         {
             method:"Delete"
         }
         )
-        if(res.ok) alert("listo")
+        if(res.ok){
+        const coinst = EstaCoins(type)
+        socket.emit('getcoins', {id:1, coins: coins + (coinst as number)} )
+        alert("listo")
+        } 
     }
 
     useEffect(() => {
         socket.on('asign', (result) => {
-            AddNewLocalTask(result)
         })
         setDataTask(data)
     },[])
@@ -76,7 +80,7 @@ export function Table({data}:{data:Task[]}) {
                             {/* {task.time === '' && !AsignarDone? <button title='asignar' onClick={() => handleSetTime(task.id)}> <FcClock style={{color:"black"}}/> </button> : <BiCurrentLocation style={{fontSize:"1.3rem", color:"black"}}/>} */}
                             <Asign handleSetTime={handleSetTime} id={task.id} time={task.time}/>
                             <EditTask Citem={task} styles={{backgroundColor:"#d1ea76", color:"black"}}/>
-                            <button title='eliminar' onClick={() => handleDelete(task.id)}><FcDeleteRow/></button>
+                            <button title='eliminar' onClick={() => handleDelete(task.id, task.type)}><FcDeleteRow/></button>
                             <button title='Ver content' onClick={() => seeDoc(task.Doc,task.id)}> <FcDocument/> </button>
                         </td>
                     </tr>

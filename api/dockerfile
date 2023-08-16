@@ -11,8 +11,8 @@ COPY prisma ./prisma
 RUN npm config rm proxy 
 RUN npm config rm https-proxy --tried removing npm proxy 
 RUN npm install 
-RUN npm run generate
 RUN npm run migrate
+RUN npm run generate
 RUN npm i -D @types/express @types/cors 
 RUN npm i ts-node
 

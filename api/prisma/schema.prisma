@@ -46,3 +46,16 @@ model Days {
   taskID Int
   task    Tasks  @relation(fields: [taskID], references: [id], onDelete: Cascade)
 }
+
+model Coins {
+  id      Int    @id @default(autoincrement())
+  coin    Int @default(0)
+}
+model Rewards {
+  id      Int    @id @default(autoincrement())
+  price   Int
+  title   String
+  content String
+  type    String @default("NORMAL")
+  time    String?
+}

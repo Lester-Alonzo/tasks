@@ -1,7 +1,7 @@
 import styles from './card.module.css'
 import {PassDays} from '@/lib/utils/utils'
 import {Task} from '@/lib/types/global'
-import {CD} from '@/lib/global'
+import {CD, Reward} from '@/lib/global'
 
 export default async function Page() {
 
@@ -9,7 +9,10 @@ export default async function Page() {
         const res = await fetch(`${url}alldy`, {next: {revalidate:0}})
         const AllLocalTask:Task[] = await res.json()
 
-    if(AllLocalTask.length == 0) return <h1>No hay datos</h1>
+    if(AllLocalTask.length == 0) return<>
+        <h1>No hay datos</h1>
+        <Reward />
+    </> 
     return (
         <main className={styles.main}>
             <section>
@@ -21,6 +24,7 @@ export default async function Page() {
                 </div>
             ))}
             </section>
+            <Reward />
         </main>
     )
 }

@@ -1,72 +1,40 @@
 'use client'
 import {Task} from '@/lib/types/global'
+import {socket} from '@/lib/utils/socke'
+
 import {useState, useEffect, createContext, useContext} from 'react'
 
 type BubbleContext = {
-    counter: number,
-    AddNewLocalTask: (newItem:Task) => void,
-    AllLocalTask: Task[],
-    CurrentParent: (parent:string) => void,
-    PickerState: (state:boolean) => void,
-    pickers: boolean
+     handleBuy: (price:number) => void
+    coins: number
 }
 
 const BubbleContext = createContext<BubbleContext>({
-    counter: 0,
-    AddNewLocalTask: (newItem: Task) => {},
-    AllLocalTask:[],
-    CurrentParent: (parent:string) => {},
-    PickerState: (state:boolean) => {},
-    pickers: false
+    handleBuy: (price:number) => {},
+    coins: 0
 })
 
 export function BubbleProvider({children}:{children:React.ReactNode}) {
-    const [counter, setCounter] = useState(0)
-    const [AllLocalTask, setAllLocaTask] = useState<Task[]>([])
-    const [utl,setUtl] = useState(0)
-    const [parent,setParent] = useState('')
-    const [pickers, setPicker] = useState(false)
-
-    const PlusCount = () => {
-        setCounter(prev => prev + 1)
+    const [coins, setCoins] = useState<number>(0)
+    const hanldleInit = async () => {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}allcoin`)
+        const data = await res.json()
+        console.log(data)
+        setCoins(data[0].coin)
     }
-    const PickerState = (state:boolean) => {
-        setPicker(prev => prev = state)
-    }
-    const AddNewLocalTask = (newItem:Task) => {
-            console.log(newItem)
-            setUtl(prev => prev + 1)
-            newItem.parent = parent
-            setAllLocaTask(prev => prev = [...prev, newItem])
-            PlusCount()
-    }
-    const CurrentParent = (parent:string) => {
-        setParent(prev => prev = parent)
+    const handleBuy = (price:number) => {
+        socket.emit('getcoins', {id:1, coins: coins - price} )
     }
     useEffect(() => {
-        let data = localStorage.getItem('asign')
-        if(data) {
-            const LocalDataCurrent = JSON.parse(data)
-            setAllLocaTask(LocalDataCurrent)
-            setCounter(LocalDataCurrent.length)
-        }
+    console.log('hola')
+    hanldleInit()
+    socket.on('updatedcoins', (data) => {
+        console.warn('hola', data)
+        setCoins(data.coin)
+    })
     },[])
-    useEffect(() => {
-        console.log("yo no me tengo que ejecutar")
-        let data = localStorage.getItem('asign')
-        if(data && counter !== 0) {
-            localStorage.setItem('asign', JSON.stringify(AllLocalTask))
-        }else if(utl !== 0) localStorage.setItem('asign', JSON.stringify(AllLocalTask))
-    },[utl])
     return (
-        <BubbleContext.Provider value={{
-            counter,
-            AddNewLocalTask,
-            AllLocalTask,
-            CurrentParent,
-            PickerState,
-            pickers
-        }}
+        <BubbleContext.Provider value={{coins, handleBuy}}
         >
             {children}
         </BubbleContext.Provider>

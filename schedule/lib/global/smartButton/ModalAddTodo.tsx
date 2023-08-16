@@ -30,7 +30,7 @@ export function ModalAddTodo({fnClose}:{fnClose:()=>void}) {
         }
     return (
         <form onSubmit={Create} style={{width:"calc(100% - 30%)", height:"calc(100vh - 56vh)", display:"flex", justifyContent:"center", alignItems:"center", gap:"1rem", backgroundColor:"rgba(0,0,0)",borderRadius:"23px"}}>
-            <input type="text" placeholder="Titulo del Stage" ref={ref} style={{padding:'1rem', border:"none", borderRadius:"11px", backgroundColor:"white", color:"black"}}/>
+            <input type="text" placeholder="Titulo del Stage" ref={ref} style={{padding:'1rem', border:"none", borderRadius:"11px", backgroundColor:"white", color:"black"}} autoFocus/>
             <button type='submit' style={{padding:'1rem', border:"none", borderRadius:"11px"}}>Listo</button>
         </form>
     )
