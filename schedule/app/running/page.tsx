@@ -1,7 +1,7 @@
 import styles from './card.module.css'
 import {PassDays} from '@/lib/utils/utils'
 import {Task} from '@/lib/types/global'
-import {CD, Reward} from '@/lib/global'
+import {CD, Reward, RunRw} from '@/lib/global'
 
 export default async function Page() {
 
@@ -21,6 +21,7 @@ export default async function Page() {
                     <h1 style={{backgroundColor:"rgba(0,0,0,.3)", padding:".5rem", borderRadius:"11px"}}>{task.title}</h1>
                     <CD />
                     <p style={{border:"1px solid white", padding:".4rem", textAlign:"center", borderRadius:"11px"}}><strong>Dias pasados:</strong> {PassDays(task.time)} </p>
+                    <RunRw type={task.type}/>
                 </div>
             ))}
             </section>

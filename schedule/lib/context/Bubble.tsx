@@ -20,7 +20,7 @@ export function BubbleProvider({children}:{children:React.ReactNode}) {
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}allcoin`)
         const data = await res.json()
         console.log(data)
-        setCoins(data[0].coin)
+        setCoins(data.coin)
     }
     const handleBuy = (price:number) => {
         socket.emit('getcoins', {id:1, coins: coins - price} )
