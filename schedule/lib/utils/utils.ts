@@ -9,13 +9,13 @@ type DAYS = {
 type RE_HAVEDAY = {have:boolean, day:string}
 
 export const MAP_DAYS:DAYS = {
-  0: 'Domingo',
-  1: 'Lunes',
-  2: 'Martes',
-  3: 'Miercoles',
-  4: 'Jueves',
-  5: 'Viernes',
-  6: 'Sabado'
+  0: 'Do',
+  1: 'Lu',
+  2: 'Ma',
+  3: 'Mi',
+  4: 'Ju',
+  5: 'Vi',
+  6: 'Sa'
 }
 
 function fileToBase64(file: File): Promise<string> {
@@ -86,8 +86,10 @@ export function EvaluateHaveThisDay(days:number[] | 'all'):RE_HAVEDAY  {
 
   const have = days.includes(day);
   return {have, day: MAP_DAYS[day]}
+}
 
-
+export function ReturnedDay(day:number) {
+  return MAP_DAYS[day]
 }
 
 export function EstaCoins(type:TASK_TYPE) {
@@ -95,4 +97,10 @@ export function EstaCoins(type:TASK_TYPE) {
  if(type === 'NUI') return 60
  if(type === 'UNI') return 80
  if(type === 'NUNI') return 20
+}
+export function BadCoins(type:TASK_TYPE) {
+ if(type === 'UI') return 50
+ if(type === 'NUI') return 30
+ if(type === 'UNI') return 20
+ if(type === 'NUNI') return 10
 }

@@ -2,16 +2,16 @@
 import {Task, Docs, TASK_TYPE} from '@/lib/types/global'
 import styles from './current.module.css'
 import {FcDeleteRow, FcDocument, FcClock} from 'react-icons/fc'
-import {BiCurrentLocation} from 'react-icons/bi'
 import {MD} from './MD'
 import {useState, useEffect} from 'react'
 import {socket} from '@/lib/utils/socke'
-import {EstaCoins} from '@/lib/utils/utils'
+
 import {useTableContext} from '@/lib/context/tableContext'
 import {EditTask} from '@/lib/global'
 import {Asign} from './Asign'
 import {useDocContext} from '@/lib/context/DocContext'
 import {useBubble} from '@/lib/context/Bubble'
+import {Asignado} from './Asignado'
 
 export function Table({data}:{data:Task[]}) {
     const [docdat, setDocdata] = useState<Docs[]>([])
@@ -44,11 +44,7 @@ export function Table({data}:{data:Task[]}) {
             method:"Delete"
         }
         )
-        if(res.ok){
-        const coinst = EstaCoins(type)
-        socket.emit('getcoins', {id:1, coins: coins + (coinst as number)} )
-        alert("listo")
-        } 
+        if(res.ok)  alert("listo")
     }
 
     useEffect(() => {
@@ -74,7 +70,7 @@ export function Table({data}:{data:Task[]}) {
                 {Taskdata.map((task, i) => (
                     <tr key={i}>
                         <td className={styles.title_task}>{task.title}</td>
-                        <td>{task.time !== '' ? task.time : 'sa'}</td>
+                        <Asignado dys={task.Days} sa={task.time}/>
                         <td>{task.type}</td>
                         <td className={styles.actions}>
                             {/* {task.time === '' && !AsignarDone? <button title='asignar' onClick={() => handleSetTime(task.id)}> <FcClock style={{color:"black"}}/> </button> : <BiCurrentLocation style={{fontSize:"1.3rem", color:"black"}}/>} */}

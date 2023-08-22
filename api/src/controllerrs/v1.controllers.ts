@@ -25,7 +25,8 @@ export async function TodoDataById(req: Request, res: Response) {
                 todoId: parseInt(id)
             },
             include: {
-                Doc: true
+                Doc: true,
+                Days: true
             }
         })
         console.log(result)

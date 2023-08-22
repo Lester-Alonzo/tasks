@@ -1,8 +1,8 @@
 :root {
   --color-1: #9d64e3;
-  --color-2: #64e3e0;
+  --color-2: #5cd1cf;
   --color-3:#e36464 ;
-  --color-4: #80ffbd;
+  --color-4: #6cdda2;
 }
 *, *::after, *::before {
   margin: 0;

@@ -17,12 +17,17 @@ interface Task {
     type:  TASK_TYPE
     time: string
     Doc: Docs[] 
+    Days: Days[]
     parent?: string
 }
 interface Docs {
     id : number;
     content: string;
     type: DOC_TYPE,
+}
+interface Days {
+    id: number
+    date: number
 }
 
 type DOC_TYPE = 'title' | 'separetor' | 'text' | 'image' | 'link' 
