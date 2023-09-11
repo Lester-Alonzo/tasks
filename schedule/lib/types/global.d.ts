@@ -11,10 +11,13 @@ NUI = No Urgente Importante
 NUNI = No Urgente No Importante
 */
 export type TASK_TYPE = 'UI' | 'UNI' | 'NUI' | 'NUNI'
+export type RUN = 'rep' | 'uni' 
 interface Task {
     id : number;
     title : string;
     type:  TASK_TYPE
+    run: RUN
+    pin: string
     time: string
     Doc: Docs[] 
     Days: Days[]

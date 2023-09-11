@@ -1,8 +1,9 @@
-import {Days} from '@/lib/types/global'
+import {Days, RUN} from '@/lib/types/global'
 import {MAP_DAYS} from '@/lib/utils/utils'
-export function Asignado ({dys, sa}:{dys:Days[], sa:string}) {
+export function Asignado ({dys, sa, type, pin}:{dys:Days[], sa:string, type:RUN, pin:string}) {
 
 if(sa === '') return <td>sa</td>
+else if(type === 'uni') return <td style={ {backgroundColor:"#64c9b5", color:"white", textShadow:"1px 1px 1px 1px black", fontSize:"1.5rem"} }>{pin}</td>
 return (
     <td>
         <div style={{display:"grid", gridTemplateColumns:"repeat(4, 1fr)", gap:".3rem"}}>

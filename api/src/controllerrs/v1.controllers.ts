@@ -1,6 +1,7 @@
 import {prisma} from '../app'
 import {Request, Response} from 'express'
 import NodeCache from 'node-cache'
+import {ParseDate} from '../utils'
 
 const cache = new NodeCache({stdTTL:100, checkperiod:120})
 
@@ -55,7 +56,7 @@ export async function CreatNewToDo(req:Request, res:Response) {
 }
 export async function CreateNewTask(req:Request, res:Response) {
     const {tid} = req.params
-    const {title, type, time} = req.body
+    const {title, type, time, run, pin} = req.body
     console.log(tid, title, type, time)
     try {
         const result = await prisma.tasks.create({
@@ -63,6 +64,8 @@ export async function CreateNewTask(req:Request, res:Response) {
                 title: title,
                 type: type,
                 time: time,
+                run: run,
+                pin: pin,
                 todoId: parseInt(tid)
             }
         })
@@ -192,14 +195,34 @@ export async function CreateDates(req:Request, res:Response) {
         res.status(500).json({message: err})  
     }
 }
+export async function CreatePin(req:Request, res:Response) {
+    const {pin} = req.body
+    const {id} = req.params
+    console.log(pin, id)
+    try {
+        const pon = await prisma.tasks.update({
+            where: {
+                id: parseInt(id)
+            },
+            data: {
+                pin: pin
+            }
+        })
+        res.json(pon)
+    } catch (err) {
+        res.status(500).json({message: err})
+    }
+}
 export async function AllDatesPerTasks(req:Request, res:Response) {
     //hacer una llamada a la base de datos con prisma, quiero que me devuelva todas las tareas, que contengan la fecha de hoy, teniendo en cuenta que se utiliza new Date().getDay() lo que devuelve un entero del 0 al 6, siendo 0 el domingo y 6 el sabado
     try {
         const today = new Date().getDay()
+        const pDate = ParseDate()
         const result = await prisma.tasks.findMany({
             where: {
-                AND: [
+                OR: [
                     {Days: {some: {date: today}}},
+                    {pin: pDate}
                 ]
             }
         })

@@ -27,6 +27,8 @@ model Tasks {
   todoId Int
   title  String
   type   String  @default("NORMAL")
+  run    String @default("rep")
+  pin    String?
   time   String?
   Doc    Doc[]
   Days   Days[]

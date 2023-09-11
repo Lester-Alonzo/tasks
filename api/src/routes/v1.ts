@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import {AllData, CreateNewTask, CreatNewToDo, CreateNewDoc, TodoDataById, DeleteTask, DeleteToDo, updateDoc, updateTask, UpdateTodo, CreateDates, AllDatesPerTasks, InitCoins, CreateReward, DeleteReward, GetAllCoins, GetAllRewards, UpdateReward} from '../controllerrs/v1.controllers'
+import {AllData, CreateNewTask, CreatNewToDo, CreateNewDoc, TodoDataById, DeleteTask, DeleteToDo, updateDoc, updateTask, UpdateTodo, CreateDates, AllDatesPerTasks, InitCoins, CreateReward, DeleteReward, GetAllCoins, GetAllRewards, UpdateReward, CreatePin} from '../controllerrs/v1.controllers'
 
 const router = Router()
 
@@ -28,5 +28,6 @@ router.post('/cnrw', CreateReward)
 router.get('/allrw', GetAllRewards)
 router.delete('/dtrw/:id', DeleteReward)
 router.put('/uprw/:id', UpdateReward)
+router.post('/uppin/:id', CreatePin)
 
 export default router

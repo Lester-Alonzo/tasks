@@ -70,11 +70,11 @@ export function Table({data}:{data:Task[]}) {
                 {Taskdata.map((task, i) => (
                     <tr key={i}>
                         <td className={styles.title_task}>{task.title}</td>
-                        <Asignado dys={task.Days} sa={task.time}/>
+                        <Asignado dys={task.Days} sa={task.time} type={task.run} pin={task.pin}/>
                         <td>{task.type}</td>
                         <td className={styles.actions}>
                             {/* {task.time === '' && !AsignarDone? <button title='asignar' onClick={() => handleSetTime(task.id)}> <FcClock style={{color:"black"}}/> </button> : <BiCurrentLocation style={{fontSize:"1.3rem", color:"black"}}/>} */}
-                            <Asign handleSetTime={handleSetTime} id={task.id} time={task.time}/>
+                            <Asign handleSetTime={handleSetTime} id={task.id} time={task.time} runt={task.run} pin={task.pin}/>
                             <EditTask Citem={task} styles={{backgroundColor:"#d1ea76", color:"black"}}/>
                             <button title='eliminar' onClick={() => handleDelete(task.id, task.type)}><FcDeleteRow/></button>
                             <button title='Ver content' onClick={() => seeDoc(task.Doc,task.id)}> <FcDocument/> </button>
