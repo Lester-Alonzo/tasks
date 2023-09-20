@@ -84,7 +84,6 @@ export function Table({data}:{data:Task[]}) {
             </tbody>
         </table>
         </section>
-        
         <MD docfrom={docdat}/>
         </>
     )

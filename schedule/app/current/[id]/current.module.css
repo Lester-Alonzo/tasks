@@ -39,13 +39,17 @@
     margin: 22px 0;
     gap: 2rem;
 }
-.nav_controls button {
+.nav_controls button, .nav_controls label {
     width: 56px;
     height: 56px;
     font-size: 1.1rem;
     border: none;
     border-radius: 50%;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(66, 66, 66);
 }
 .actions {
     display: flex;

@@ -43,12 +43,18 @@ export function PassDays(date:string) {
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   return diffDays;
 }
+function eliminarArroba(texto: string): string {
+    return texto.replace(/@/g, '');
+}
+function eliminarPercentaje(texto: string): string {
+    return texto.replace(/%/g, '');
+}
 /**
  * Recibe un string, devuelve un objeto del tipo doc
  * @param {string} doc  - El string a parsear
  * @return {CurrentDoc} - El objeto parseado
  */
-export function parseDoc(doc: string, url:string): CurrentDoc {
+export function parseDoc(doc: string): CurrentDoc {
   const arrstring = doc.split(' ');
   const type = arrstring[0].toLowerCase()
   if(type == '#') {
@@ -61,11 +67,17 @@ export function parseDoc(doc: string, url:string): CurrentDoc {
       content: arrstring.slice(1).join(' '),
       type: 'separetor'
     }
-  }else if(type === '@' && url){
+  }else if(type === '@'){
     return {
       content: arrstring.slice(1).join(' '),
       type: 'link',
-      url: url
+      url: eliminarArroba(arrstring.slice(1).join(' '))
+    }
+  }else if(type === '%'){
+    return {
+      content: arrstring.slice(1).join(' '),
+      type: 'image',
+      url: eliminarPercentaje(arrstring.slice(1).join(' '))
     }
   }
   return {

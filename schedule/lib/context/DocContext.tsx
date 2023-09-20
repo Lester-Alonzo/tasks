@@ -32,7 +32,7 @@ export function DocProvider({children}:{children:React.ReactNode}) {
         setTskId(prev => id)
     }
     const currentdocedit = (doc:string, url:string='') => {
-        const cdoc = parseDoc(doc, url)
+        const cdoc = parseDoc(doc)
         setCurrentDoc(prev => cdoc)
     }
     const hanldeAddDoc = async () => {

@@ -34,9 +34,11 @@ export function MD({docfrom}:{docfrom:Docs[]}) {
     return (
         <>
         <Controls/>
+        <div style={{display:"flex", flexDirection:"column", borderRadius:"11px", justifyContent:"center", alignItems:"center", backgroundColor:"#e3e3e3", color:"black", padding:"1rem"}}>
         {docfrom.map((d, i) => (
             <Items key={i} doc={d}/>
         ))}
+        </div>
         <Visor/>
         <InputPro ref={ref} onIput={handler} onKeyDown={handlerKD}/>
         </>
