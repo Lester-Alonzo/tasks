@@ -20,4 +20,6 @@ COPY . .
 
 EXPOSE 3001
 
+RUN npm run init
+
 CMD [ "npm", "run", "dev" ]
