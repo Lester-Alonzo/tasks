@@ -334,3 +334,7 @@ export async function UpdateReward(req:Request, res:Response) {
         res.status(500).json({message: err})
     }
 }
+export async function UploadFile(req:Request, res:Response) {
+    console.log("all data to upload",req.file, req.body)
+    res.json({message: 'File uploaded'})
+}
