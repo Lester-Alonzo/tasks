@@ -49,6 +49,9 @@ function eliminarArroba(texto: string): string {
 function eliminarPercentaje(texto: string): string {
     return texto.replace(/%/g, '');
 }
+function changeWatch(texto: string): string {
+    return texto.replace(/watch\?v=/g, 'embed/');
+}
 /**
  * Recibe un string, devuelve un objeto del tipo doc
  * @param {string} doc  - El string a parsear
@@ -78,6 +81,12 @@ export function parseDoc(doc: string): CurrentDoc {
       content: arrstring.slice(1).join(' '),
       type: 'image',
       url: eliminarPercentaje(arrstring.slice(1).join(' '))
+    }
+  }else if(type === '*') {
+    return {
+      content: changeWatch(arrstring.slice(1).join(' ')),
+      type: 'yt',
+      url: changeWatch(arrstring.slice(1).join(' '))
     }
   }
   return {

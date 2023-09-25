@@ -335,6 +335,6 @@ export async function UpdateReward(req:Request, res:Response) {
     }
 }
 export async function UploadFile(req:Request, res:Response) {
-    console.log("all data to upload",req.file, req.body)
-    res.json({message: 'File uploaded'})
+    console.log(req)
+    res.json({name: req.files})
 }

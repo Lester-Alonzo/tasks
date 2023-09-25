@@ -36,6 +36,7 @@ export function DocProvider({children}:{children:React.ReactNode}) {
         setCurrentDoc(prev => cdoc)
     }
     const hanldeAddDoc = async () => {
+        console.log(currentDoc)
         const rs = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}cndc/${tskId}`, {
             method: 'POST',
             headers: {

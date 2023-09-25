@@ -34,7 +34,7 @@ export function MD({docfrom}:{docfrom:Docs[]}) {
     return (
         <>
         <Controls/>
-        <div style={{display:"flex", flexDirection:"column", borderRadius:"11px", justifyContent:"center", alignItems:"center", backgroundColor:"#e3e3e3", color:"black", padding:"1rem"}}>
+        <div style={{display:"flex", flexDirection:"column", borderRadius:"11px", justifyContent:"center", alignItems:"center", backgroundColor:"#e3e3e3", color:"black", padding:"1rem", overflow:"hidden"}}>
         {docfrom.map((d, i) => (
             <Items key={i} doc={d}/>
         ))}

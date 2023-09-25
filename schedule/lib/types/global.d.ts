@@ -33,7 +33,7 @@ interface Days {
     date: number
 }
 
-type DOC_TYPE = 'title' | 'separetor' | 'text' | 'image' | 'link' 
+type DOC_TYPE = 'title' | 'separetor' | 'text' | 'image' | 'link' | 'yt' 
 export interface CurrentDoc {
     type: DOC_TYPE,
     content: string

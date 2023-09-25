@@ -13,12 +13,13 @@ export function Items({doc}:{doc:Docs}) {
         return (
             <>
             <a href={doc.content} target='_blank'>
-                <Image src={doc.content} alt='' width={160} height={160} style={{borderRadius:"11px"}}/>
+                <Image src={doc.content} alt='' width={280} height={160} style={{borderRadius:"11px"}}/>
             </a>
             </>
         )
-    }
-    return (
+    }else if(doc.type === 'yt') {
+                return <iframe src={`${doc.content}${'?controls=1'}}`}  width={280} height={160} style={{borderRadius:"11px"}}></iframe>
+    } else return (
         <p className={styles[doc.type]}>
             {doc.content}
         </p>

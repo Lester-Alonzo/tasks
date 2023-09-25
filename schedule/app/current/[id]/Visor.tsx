@@ -11,6 +11,11 @@ export function Visor() {
         )
     }else if(currentDoc.type === 'image') {
         <Image src={currentDoc.url as string} alt='' width={100} height={100}/>
+    }else if(currentDoc.type === 'yt') {
+        <>
+            {currentDoc.type}
+                <iframe src={currentDoc.content}  width={160} height={160}></iframe>
+        </>
     }
     return (
         <p className={styles[currentDoc.type]} style={{marginBottom:"1rem"}}>

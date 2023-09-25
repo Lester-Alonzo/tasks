@@ -19,15 +19,17 @@ export function Controls() {
             method:"POST",
             body: formData
         })
+        const name = await rs.json()
+        console.log()
+
+        await navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_SOCKET_URL}public/${name.name[0].filename}`)
         setLoading(false)
-        const filename = entri.file as File
-        alert(`${process.env.NEXT_PUBLIC_SOCKET_URL}public/${filename.name}`)
     }
     return ( 
         <>
         <nav className={styles.nav_controls}>
             <form action="" encType='multipart/form-data' ref={formRef} style={{opacity:`${loading? '.3':'1'}`}}>
-                <label htmlFor="file"> <FcFolder/> <input type="file" name="file" id="file" disabled={loading? true : false} multiple hidden onInput={handleChange}/></label>
+                <label htmlFor="file"> <FcFolder/> <input type="file" name="file" id="file" disabled={loading? true : false} hidden onInput={handleChange}/></label>
             </form>
             <button title='Open Draw' onClick={() => setMostrar(prev => !prev)}>️<FcLandscape/></button>
             {/* <button title='Guardar'><AiOutlineSave/> </button> */}
