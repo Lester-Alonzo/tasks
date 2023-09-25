@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:current-alpine
 RUN mkdir -p /usr/src/app
 RUN mkdir -p /usr/src/app/front
 

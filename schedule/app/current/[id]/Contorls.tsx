@@ -1,6 +1,6 @@
 'use client'
+import {UpPromptM} from '@/lib/global'
 import styles from './current.module.css'
-import {AiOutlineSave} from 'react-icons/ai'
 import { FcLandscape,FcFolder } from 'react-icons/fc'
 import {Tldraw} from '@tldraw/tldraw'
 import  '@tldraw/tldraw/tldraw.css'
@@ -8,6 +8,8 @@ import {useState, useRef} from 'react'
 
 export function Controls() {
     const [mostrar, setMostrar] = useState<boolean>(false)
+    const [upnotify, setUpnotify] = useState<boolean>(false)
+    const [url, setUrl] = useState<string>('')
     const [loading, setLoading] = useState(false)
     const formRef = useRef<HTMLFormElement>(null)
     const handleChange = async () => {
@@ -22,8 +24,12 @@ export function Controls() {
         const name = await rs.json()
         console.log()
 
-        await navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_SOCKET_URL}public/${name.name[0].filename}`)
+        setUrl(prev => `${process.env.NEXT_PUBLIC_SOCKET_URL}public/${name.name[0].filename}`)
         setLoading(false)
+        setUpnotify(true)
+    }
+    function fnCLose() {
+        setUpnotify(false)
     }
     return ( 
         <>
@@ -37,6 +43,7 @@ export function Controls() {
                {mostrar && <div style={{position:"fixed", inset:"0", zIndex:"88"}}>
                 <Tldraw/>
                 </div>} 
+        {upnotify && <UpPromptM url={url} close={fnCLose} />}
         </>
     )
 }
