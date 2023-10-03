@@ -21,7 +21,7 @@ export default async function Page() {
                     <h1 style={{backgroundColor:"rgba(0,0,0,.3)", padding:".5rem", borderRadius:"11px"}}>{task.title}   {task.pin}</h1>
                     <CD />
                     <p style={{border:"1px solid white", padding:".4rem", textAlign:"center", borderRadius:"11px"}}><strong>Dias pasados:</strong> {PassDays(task.time)} </p>
-                    <RunRw type={task.type}/>
+                    <RunRw type={task.type} idt={task.id}/>
                 </div>
             ))}
             </section>

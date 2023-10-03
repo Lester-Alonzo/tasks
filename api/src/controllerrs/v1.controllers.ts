@@ -1,8 +1,8 @@
 import {prisma} from '../app'
 import {Request, Response} from 'express'
+import {ParseDate, tday} from '../utils'
+import {Todo} from '../utils/utiiltypes'
 import NodeCache from 'node-cache'
-import {ParseDate} from '../utils'
-
 const cache = new NodeCache({stdTTL:100, checkperiod:120})
 
 export async function AllData(req: Request, res: Response) {
@@ -208,6 +208,7 @@ export async function CreatePin(req:Request, res:Response) {
                 pin: pin
             }
         })
+        cache.del('dates')
         res.json(pon)
     } catch (err) {
         res.status(500).json({message: err})
@@ -216,6 +217,12 @@ export async function CreatePin(req:Request, res:Response) {
 export async function AllDatesPerTasks(req:Request, res:Response) {
     //hacer una llamada a la base de datos con prisma, quiero que me devuelva todas las tareas, que contengan la fecha de hoy, teniendo en cuenta que se utiliza new Date().getDay() lo que devuelve un entero del 0 al 6, siendo 0 el domingo y 6 el sabado
     try {
+        if(cache.get('dates')) {
+            console.log('soy cache',cache.get('dates'))
+            tday.TodayTasks(cache.get('dates') as Todo[])
+            let final = tday.obtaninTasks()
+            return res.status(200).json(final)
+        }
         const today = new Date().getDay()
         const pDate = ParseDate()
         const result = await prisma.tasks.findMany({
@@ -226,11 +233,11 @@ export async function AllDatesPerTasks(req:Request, res:Response) {
                 ]
             }
         })
-        if(cache.get('dates')) res.status(200).json(cache.get('dates'))
-        else {
             cache.set('dates', result)
-            res.status(200).json(result)
-        }
+            tday.TodayTasks(result)
+            let final = tday.obtaninTasks()
+
+            res.status(200).json(final)
     } catch (err) {
         res.status(500).json({message: err})  
     }

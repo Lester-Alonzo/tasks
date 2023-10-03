@@ -1,6 +1,7 @@
 import {app, server, io, prisma} from './app'
 import {Request, Response} from 'express'
 import {Socket} from 'socket.io'
+import { tday } from './utils/index'
 
 app.get('/api', async (req:Request, res:Response) => {
     res.send('Hello World')
@@ -53,7 +54,7 @@ io.on('connection', (socket) => {
     }
     })
     socket.on('getcoins', async (payload) => {
-        const {id, coins} = payload
+        const {id, coins, tid} = payload
         try {
             const result = await prisma.coins.update({
                 where: {
@@ -63,6 +64,7 @@ io.on('connection', (socket) => {
                     coin: coins
                 }
             })
+            tday.markTask(tid)
             socket.emit('updatedcoins', result)
         } catch (error) {
             socket.emit('error' , 'error')

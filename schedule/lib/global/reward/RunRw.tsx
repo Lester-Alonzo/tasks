@@ -5,16 +5,16 @@ import {EstaCoins, BadCoins} from '@/lib/utils/utils'
 import {TASK_TYPE} from '@/lib/types/global'
 import {useBubble} from '@/lib/context/Bubble'
 
-export function RunRw ({type}:{type:TASK_TYPE}) {
+export function RunRw ({type, idt}:{type:TASK_TYPE, idt:number}) {
     const {coins} = useBubble()
    const handleDblClick = () => {
          const coinst = EstaCoins(type)
-         socket.emit('getcoins', {id:1, coins: coins + (coinst as number)} ) 
+         socket.emit('getcoins', {id:1, coins: coins + (coinst as number), tid:idt} ) 
          alert("listo")
    } 
    const handleConsien = () => {
         const coinst = BadCoins(type)
-        socket.emit('getcoins', {id:1, coins: coins - (coinst as number)} )
+        socket.emit('getcoins', {id:1, coins: coins - (coinst as number), tid:idt} )
          alert("listo")
    }
 return (
