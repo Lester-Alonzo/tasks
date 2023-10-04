@@ -23,7 +23,11 @@ Las SubTareas pueden ser creadas para un solo dia, o para repetir cada dia que s
 
 - Uno para Subir Archivos
 - El otro para Utilizar la pizarra
+
   ![alt imagen](https://firebasestorage.googleapis.com/v0/b/hostingimage-8a5bd.appspot.com/o/images%2FScreenshot%20s-10-04%20124043.png?alt=media&token=c12908c7-a577-450f-bbb1-3344387e23c3 "Botones")
+  La Pizzara:
+
+  ![alt imagen](https://firebasestorage.googleapis.com/v0/b/hostingimage-8a5bd.appspot.com/o/images%2FScreenshot%202023-10-04%20124154.png?alt=media&token=7280c6c8-61b2-48fd-a8cd-2b102660ad6b "Botones")
 
 ## Tareas del Dia
 
