@@ -31,6 +31,8 @@ Las SubTareas pueden ser creadas para un solo dia, o para repetir cada dia que s
 
 ## Tareas del Dia
 
+Donde Se muestran las tareas pendientes del Dia, Ademas de los premios que se pueden cangear por los puntos.
+
 ## ![alt imagen](https://firebasestorage.googleapis.com/v0/b/hostingimage-8a5bd.appspot.com/o/images%2FScreenshot%202023-10-04%20124252.png?alt=media&token=f4f52a6e-7697-4e7f-979e-affedfa2faa5 "Tareas del Dia")
 
 ## Instalacion
