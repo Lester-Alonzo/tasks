@@ -6,8 +6,7 @@ WORKDIR /usr/src/app/backend
 
 COPY package*.json ./
 COPY prisma ./prisma
-# COPY .env ./
-# RUN  cat .env
+
 RUN npm config rm proxy 
 RUN npm config rm https-proxy --tried removing npm proxy 
 RUN npm install 
